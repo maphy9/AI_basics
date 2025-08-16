@@ -1,4 +1,4 @@
-from task2 import neural_network
+from .task2 import neural_network
 
 def deep_neural_network(input, network_weights, network_biases=[], network_activation_functions=[]):
     layers_count = len(network_weights)

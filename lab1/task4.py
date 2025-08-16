@@ -1,5 +1,5 @@
 from random import uniform
-from task1 import neuron
+from .task1 import neuron
 import json
 
 class Layer:
@@ -40,7 +40,7 @@ class NeuralNetwork:
         if len(self.layers) > 0:
             input_size = self.layers[-1].output_size
             if input_size != len(weights[0]):
-                raise Exception('New layer has bad input size')
+                raise Exception('New layer has incompatible input size')
 
         new_layer = Layer(weights, biases, activation_function)
         self.layers.append(new_layer)

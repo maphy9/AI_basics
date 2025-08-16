@@ -1,4 +1,4 @@
-from task1 import neuron
+from .task1 import neuron
 
 def neural_network(input, layer_weights, biases=None, activation_function=lambda x: x):
     neuron_count = len(layer_weights)
