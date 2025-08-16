@@ -36,7 +36,7 @@ def subtract_matrices(m1, m2):
     return [[m1[i][j] - m2[i][j] for j in range(len(m1[0]))] for i in range(len(m1))]
 
 
-def layer_error(layer_weights, expected_output):
+def layer_error(input, layer_weights, expected_output):
     neuron_count = len(layer_weights)
     output = neural_network(input, layer_weights)
     error = 0
@@ -62,7 +62,7 @@ learning_rate = 0.1
 for i in range(20):
     print(f'Epoch {i + 1}')
     print(layer_weights)
-    output, error = layer_error(layer_weights, expected_output)
+    output, error = layer_error(input, layer_weights, expected_output)
     print(f'Output={output}')
     print(f'Error={error}\n')
     layer_weights = train(input, layer_weights, expected_output, learning_rate)
