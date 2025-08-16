@@ -49,20 +49,20 @@ def train(input, layer_weights, expected_output, learning_rate=0.1):
     neuron_count = len(layer_weights)
     output = neural_network(input, layer_weights)
     delta = subtract_vectors(output, expected_output)
-    delta = multiply_vector_by_scalar(delta, 2 / neuron_count)
     delta = vector_outer_product(delta, input)
-    delta = multiply_matrix_by_scalar(delta, learning_rate)
+    delta = multiply_matrix_by_scalar(delta, learning_rate * 2 / neuron_count)
     return subtract_matrices(layer_weights, delta)
 
 
-layer_weights = [[0.5]]
-expected_output = [0.8]
-input = [2]
-learning_rate = 0.1
-for i in range(20):
-    print(f'Epoch {i + 1}')
-    print(layer_weights)
-    output, error = layer_error(input, layer_weights, expected_output)
-    print(f'Output={output}')
-    print(f'Error={error}\n')
-    layer_weights = train(input, layer_weights, expected_output, learning_rate)
+if __name__ == '__main__':
+    layer_weights = [[0.5]]
+    expected_output = [0.8]
+    input = [2]
+    learning_rate = 0.1
+    for i in range(20):
+        print(f'Epoch {i + 1}')
+        print(layer_weights)
+        output, error = layer_error(input, layer_weights, expected_output)
+        print(f'Output={output}')
+        print(f'Error={error}\n')
+        layer_weights = train(input, layer_weights, expected_output, learning_rate)
