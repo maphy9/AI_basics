@@ -1,5 +1,5 @@
 from .task1 import train, layer_error
-from random import uniform
+from lab1.task2 import neural_network
 
 if __name__ == '__main__':
     inputs = [
@@ -25,13 +25,19 @@ if __name__ == '__main__':
         [0.2, 0.4, 0.0],
         [-0.3, 0.5, 0.1]
     ]
-    for i in range(10):
+    neuron_count = len(layer_weights)
+    
+    for i in range(1000):
         print(f'Epoch {i + 1}')
-        print(layer_weights)
         total_error = 0
-        for input, expected_output in zip(inputs, expected_outputs):
-            _, error = layer_error(input, layer_weights, expected_output)
+        for j, input in enumerate(inputs):
+            expected_output = expected_outputs[j]
+            output = neural_network(input, layer_weights)
+            layer_weights = train(input, layer_weights, output, expected_output, learning_rate)
+            error = layer_error(neuron_count, output, expected_output)
             total_error += error
-        print(f'Error={total_error}\n')
-        for input, expected_output in zip(inputs, expected_outputs):
-            layer_weights = train(input, layer_weights, expected_output, learning_rate)
+            print(f'Series #{j + 1}')
+            print(layer_weights)
+            print(f'Error={error} ({error * neuron_count})')
+            print()
+        print(f'Error={total_error} ({total_error * neuron_count})\n')
