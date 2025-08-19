@@ -5,7 +5,7 @@ def deep_neural_network(input, network_weights, network_biases=[], network_activ
     if len(network_biases) < layers_count:
         network_biases += [None] * (layers_count - len(network_biases))
     if len(network_activation_functions) < layers_count:
-        network_activation_functions += [lambda x: x] * (layers_count - len(network_activation_functions))
+        network_activation_functions += ['linear'] * (layers_count - len(network_activation_functions))
     for layer_weights, biases, activation_function in zip(network_weights, network_biases, network_activation_functions):
         input = neural_network(input, layer_weights, biases, activation_function)
     return input

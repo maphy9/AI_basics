@@ -3,7 +3,7 @@ from .task1 import neuron
 import json
 
 class Layer:
-    def __init__(self, weights, biases=[], activation_function=lambda x: x):
+    def __init__(self, weights, biases=[], activation_function='linear'):
         self.input_size = len(weights[0])
         self.output_size = len(weights)
         self.weights = weights
@@ -23,7 +23,7 @@ class Layer:
     @staticmethod
     def generate_random_layer(input_size, output_size,
                               weight_min_value=-1, weight_max_value=1,
-                              biases=[], activation_function=lambda x: x):
+                              biases=[], activation_function='linear'):
         weights = [
             [uniform(weight_max_value, weight_min_value) for _ in range(input_size)]
             for _ in range(output_size)
@@ -36,7 +36,7 @@ class NeuralNetwork:
         self.layers = []
 
 
-    def add_layer(self, weights, biases=[], activation_function=lambda x: x):
+    def add_layer(self, weights, biases=[], activation_function='linear'):
         if len(self.layers) > 0:
             input_size = self.layers[-1].output_size
             if input_size != len(weights[0]):
@@ -62,8 +62,6 @@ class NeuralNetwork:
         network_activation_functions = data['activation_functions']
         nn = NeuralNetwork()
         for weights, biases, activation_function in zip(network_weights, network_biases, network_activation_functions):
-            if activation_function is None:
-                activation_function = lambda x: x
             nn.add_layer(weights, biases, activation_function)
         return nn
 

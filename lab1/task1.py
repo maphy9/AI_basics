@@ -1,10 +1,13 @@
-def neuron(input, weights, bias=0, activation_function=lambda x: x):
+from utils.activation_functions import activation_functions
+
+def neuron(input, weights, bias=0, activation_function='linear'):
     if len(input) != len(weights):
         raise Exception('Neuron input vector and weights vector have different sizes')
     output = 0
     for x, w in zip(input, weights):
         output += x * w
-    return activation_function(output + bias)
+    f, _ = activation_functions[activation_function]
+    return f(output + bias)
 
 if __name__ == '__main__':
     input = [0.5, 0.75, 0.1]

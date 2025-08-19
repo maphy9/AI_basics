@@ -1,6 +1,6 @@
 from .task1 import neuron
 
-def neural_network(input, layer_weights, biases=None, activation_function=lambda x: x):
+def neural_network(input, layer_weights, biases=None, activation_function='linear'):
     neuron_count = len(layer_weights)
     if biases is None:
         biases = [0] * neuron_count
