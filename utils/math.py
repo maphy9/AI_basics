@@ -32,3 +32,18 @@ def subtract_matrices(m1, m2):
     if len(m1) != len(m2) or len(m1[0]) != len(m2[0]):
         raise Exception('Can\'t subtract matrices with different dimensions')
     return [[m1[i][j] - m2[i][j] for j in range(len(m1[0]))] for i in range(len(m1))]
+
+
+def transpose_matrix(m):
+    return [[m[i][j] for i in range(len(m))] for j in range(len(m[0]))]
+
+
+def apply_function_to_vector(v, f):
+    return [f(x) for x in v]
+
+
+def vector_hadamard_product(v1, v2):
+    if len(v1) != len(v2):
+        raise Exception('Can\'t multiply vectors of different sizes')
+    return [x1 * x2 for x1, x2 in zip(v1, v2)]
+
