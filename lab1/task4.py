@@ -53,7 +53,7 @@ class NeuralNetwork:
 
 
     @staticmethod
-    def load_from_json_file(file_name):
+    def load_from_json(file_name):
         data = None
         with open(file_name, 'r') as f:
             data = json.load(f)
@@ -81,6 +81,6 @@ if __name__ == '__main__':
     nn.add_layer(weights2)
 
     # or load from a json file
-    # nn = NeuralNetwork.load_from_file('test.json')
+    # nn = NeuralNetwork.load_from_json('test.json')
 
     print(nn.predict(input))
