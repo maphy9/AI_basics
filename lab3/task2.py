@@ -43,8 +43,6 @@ def train(input, network_weights, expected_output, learning_rate=0.1, network_bi
         weights_delta = vector_outer_product(layer_delta, input)
         network_weights[i] = subtract_matrices(network_weights[i], weights_delta)
 
-    return network_weights
-
 
 if __name__ == '__main__':
     inputs = [
@@ -84,6 +82,6 @@ if __name__ == '__main__':
         for input, expected_output in zip(inputs, expected_outputs):
             output = deep_neural_network(input, network_weights)
             print(output)
-            network_weights = train(input, network_weights, expected_output, learning_rate, [], network_activation_functions)
+            train(input, network_weights, expected_output, learning_rate, [], network_activation_functions)
         print('')
 
