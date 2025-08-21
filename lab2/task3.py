@@ -27,12 +27,12 @@ if __name__ == '__main__':
     neuron_count = len(layer_weights)
     learning_rate = 0.01
     
-    training_inputs, training_expected_outputs = read_colors_dataset('datasets/colors/training_colors.txt')
+    train_inputs, train_expected_outputs = read_colors_dataset('datasets/colors/train_colors.txt')
     iterations = 20
-    total_count = len(training_inputs) * iterations
+    total_count = len(train_inputs) * iterations
     progress = 0
     for iteration in range(iterations):
-        for input, expected_output in zip(training_inputs, training_expected_outputs):
+        for input, expected_output in zip(train_inputs, train_expected_outputs):
             output = neural_network(input, layer_weights)
             error = layer_error(neuron_count, output, expected_output)
             layer_weights = train(input, layer_weights, output, expected_output, learning_rate)

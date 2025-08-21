@@ -157,12 +157,12 @@ if __name__ == '__main__':
     # nn = NeuralNetwork()
     # nn.add_layer(Layer.generate_random_layer(784, 40, weight_min_value=-0.1, weight_max_value=0.1, activation_function='relu'))
     # nn.add_layer(Layer.generate_random_layer(40, 10, weight_min_value=-0.1, weight_max_value=0.1))
-    nn = NeuralNetwork.load_from_json('lab3/neural_network.json')
+    nn = NeuralNetwork.load_from_json('lab3/MNIST_network.json')
     learning_rate = 0.01
 
     progress = 0
-    total = len(train_images)
-    iterations = 2
+    total_count = len(train_images)
+    iterations = 5
     for _ in range(iterations):
         for image, label in zip(train_images, train_labels):
             expected_output = [0] * 10
@@ -170,7 +170,7 @@ if __name__ == '__main__':
             nn.fit(image, expected_output, learning_rate)
             progress += 1
             print(' ' * 20, end='\r')
-            print(f'Progress: {round(100 * progress / (total * iterations), 2)}%', end='\r')
+            print(f'Progress: {round(100 * progress / (total_count * iterations), 2)}%', end='\r')
     print(' ' * 20, end='\r')
     print('Training finished')
 
@@ -183,7 +183,8 @@ if __name__ == '__main__':
     print('Read test images')
 
     correct_count = 0
-    total = len(test_images)
+    progress = 0
+    total_count = len(test_images)
     for image, label in zip(test_images, test_labels):
         output = nn.predict(image)
         max_index = 0
@@ -192,9 +193,11 @@ if __name__ == '__main__':
                 max_index = i
         if label == max_index:
             correct_count += 1
-        print(' ' * 35, end='\r')
-        print(f'Correct percentage: {round(100 * correct_count / total, 2)}%', end='\r')
-    print(' ' * 35, end='\r')
-    print(f'Correct percentage: {round(100 * correct_count / total, 2)}%')
+        progress += 1
+        print(' ' * 50, end='\r')
+        print(f'Progress: {round(100 * progress / total_count)}%', end='; ')
+        print(f'Correct percentage: {round(100 * correct_count / total_count, 2)}%', end='\r')
+    print(' ' * 50, end='\r')
+    print(f'Correct percentage: {round(100 * correct_count / total_count, 2)}%')
 
-    nn.save_to_json('lab3/neural_network.json')
+    nn.save_to_json('lab3/MNIST_network.json')

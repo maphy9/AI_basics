@@ -11,9 +11,9 @@ model.add(Dense(4, weights=weights, use_bias=False))
 optimizer = SGD(learning_rate=0.01)
 model.compile(optimizer, loss='mse')
 
-training_inputs, training_expected_outputs = read_colors_dataset('datasets/colors/training_colors.txt')
+train_inputs, train_expected_outputs = read_colors_dataset('datasets/colors/train_colors.txt')
 for _ in range(20):
-    for input, expected_output in zip(training_inputs, training_expected_outputs):
+    for input, expected_output in zip(train_inputs, train_expected_outputs):
         model.fit(np.array([input]), np.array([expected_output]))
 
 test_inputs, test_expected_outputs = read_colors_dataset('datasets/colors/test_colors.txt')
